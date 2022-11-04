@@ -14,6 +14,13 @@ model User {
   id            String   @id @default(uuid())
   email         String   @unique
   name          String
-  password      String
+  account       Account?
+}
+
+model Account {
+  id            String   @id @default(uuid())
   refreshToken  String?
+  password      String
+  userId        String @unique 
+  user          User   @relation(fields: [userId], references: [id])   
 }

@@ -4,8 +4,8 @@ import { AccessTokenGuard } from 'src/common/guards/accessToken.guard';
 import { RefreshTokenGuard } from 'src/common/guards/refreshToken.guard';
 import { AuthService } from './auth.service';
 import { AuthDto } from '../common/dto/auth.dto';
-import { UserDto } from '../common/dto/user.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { CreateUserDto } from 'src/common/dto/create-user.dto';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -13,7 +13,7 @@ export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Post('register')
-  register(@Body() createUserDto: UserDto) {
+  register(@Body() createUserDto: CreateUserDto) {
     return this.authService.register(createUserDto);
   }
 

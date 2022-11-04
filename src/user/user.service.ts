@@ -1,9 +1,10 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { User } from '@prisma/client';
-import { UserDto } from 'src/common/dto/user.dto';
 import { hash } from 'bcrypt';
 import { ConfigService } from '@nestjs/config';
+import { CreateUserDto } from 'src/common/dto/create-user.dto';
+import { UserDto } from 'src/common/dto/user.dto';
 
 @Injectable()
 export class UserService {
@@ -12,7 +13,7 @@ export class UserService {
     private readonly configService: ConfigService,
   ) {}
 
-  async create(createUserDto: UserDto): Promise<User> {
+  async create(createUserDto: CreateUserDto): Promise<User> {
     const userExists = await this.prismaService.user.findUnique({
       where: { email: createUserDto.email },
     });
@@ -28,7 +29,11 @@ export class UserService {
     return this.prismaService.user.create({
       data: {
         ...rest,
-        password: hashedPassword,
+        account: {
+          create: {
+            password: hashedPassword,
+          },
+        },
       },
     });
   }
@@ -55,20 +60,11 @@ export class UserService {
     if (!userExists)
       throw new HttpException('User does not exist', HttpStatus.BAD_REQUEST);
 
-    const { password, ...rest } = updateUserDto;
-    const saltRounds = parseInt(
-      this.configService.get<string>('BCRYPT_SALT_ROUNDS'),
-    );
-    const hashedPassword = await hash(password, saltRounds);
-
     return this.prismaService.user.update({
       where: {
         id,
       },
-      data: {
-        ...rest,
-        password: hashedPassword,
-      },
+      data: updateUserDto,
     });
   }
 

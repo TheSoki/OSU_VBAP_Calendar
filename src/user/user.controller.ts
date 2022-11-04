@@ -11,8 +11,9 @@ import {
 import { AccessTokenGuard } from 'src/common/guards/accessToken.guard';
 import { UserService } from './user.service';
 import { User } from '@prisma/client';
-import { UserDto } from 'src/common/dto/user.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { CreateUserDto } from 'src/common/dto/create-user.dto';
+import { UserDto } from 'src/common/dto/user.dto';
 
 @ApiTags('user')
 @Controller('user')
@@ -21,7 +22,7 @@ export class UserController {
 
   @UseGuards(AccessTokenGuard)
   @Post()
-  create(@Body() createUserDto: UserDto) {
+  create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }
 
