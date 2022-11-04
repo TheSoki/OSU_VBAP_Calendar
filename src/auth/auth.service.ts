@@ -7,7 +7,7 @@ import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { AuthDto } from '../dto/auth.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { JwtDto } from './dto/jwt.dto';
+import { JwtDto } from '../dto/jwt.dto';
 import { UserDto } from '../dto/user.dto';
 import { compare, hash } from 'bcrypt';
 
@@ -15,8 +15,8 @@ import { compare, hash } from 'bcrypt';
 export class AuthService {
   constructor(
     private readonly prismaService: PrismaService,
-    private jwtService: JwtService,
-    private configService: ConfigService,
+    private readonly jwtService: JwtService,
+    private readonly configService: ConfigService,
   ) {}
 
   async register(createUserDto: UserDto): Promise<any> {
@@ -65,7 +65,10 @@ export class AuthService {
   }
 
   hashData(data: string) {
-    return hash(data, process.env.BCRYPT_SALT_ROUNDS);
+    const saltRounds = parseInt(
+      this.configService.get<string>('BCRYPT_SALT_ROUNDS'),
+    );
+    return hash(data, saltRounds);
   }
 
   async updateRefreshToken(id: string, refreshToken: string) {

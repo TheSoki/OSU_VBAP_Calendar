@@ -12,7 +12,9 @@ import { AccessTokenGuard } from 'src/common/guards/accessToken.guard';
 import { UserService } from './user.service';
 import { User } from '@prisma/client';
 import { UserDto } from 'src/dto/user.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('user')
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
