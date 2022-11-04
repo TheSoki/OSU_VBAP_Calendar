@@ -5,10 +5,10 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
-import { AuthDto } from '../dto/auth.dto';
+import { AuthDto } from '../common/dto/auth.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { JwtDto } from '../dto/jwt.dto';
-import { UserDto } from '../dto/user.dto';
+import { JwtDto } from '../common/dto/jwt.dto';
+import { UserDto } from '../common/dto/user.dto';
 import { compare, hash } from 'bcrypt';
 
 @Injectable()

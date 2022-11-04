@@ -3,8 +3,8 @@ import { Request } from 'express';
 import { AccessTokenGuard } from 'src/common/guards/accessToken.guard';
 import { RefreshTokenGuard } from 'src/common/guards/refreshToken.guard';
 import { AuthService } from './auth.service';
-import { AuthDto } from '../dto/auth.dto';
-import { UserDto } from '../dto/user.dto';
+import { AuthDto } from '../common/dto/auth.dto';
+import { UserDto } from '../common/dto/user.dto';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('auth')
