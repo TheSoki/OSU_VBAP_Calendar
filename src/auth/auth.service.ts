@@ -1,8 +1,4 @@
-import {
-  BadRequestException,
-  ForbiddenException,
-  Injectable,
-} from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { AuthDto } from '../common/dto/auth.dto';
@@ -23,9 +19,8 @@ export class AuthService {
     const userExists = await this.prismaService.user.findUnique({
       where: { email: createUserDto.email },
     });
-    if (userExists) {
-      throw new BadRequestException('User already exists');
-    }
+    if (userExists)
+      throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
 
     const hash = await this.hashData(createUserDto.password);
     const newUser = await this.prismaService.user.create({
@@ -45,12 +40,13 @@ export class AuthService {
     const user = await this.prismaService.user.findUnique({
       where: { email: data.email },
     });
-    if (!user) throw new BadRequestException('User does not exist');
+    if (!user)
+      throw new HttpException('User does not exist', HttpStatus.BAD_REQUEST);
 
     const passwordMatches = await compare(user.password, data.password);
 
     if (!passwordMatches)
-      throw new BadRequestException('Password is incorrect');
+      throw new HttpException('Password is incorrect', HttpStatus.BAD_REQUEST);
 
     const tokens = await this.getTokens(user);
 
@@ -113,11 +109,12 @@ export class AuthService {
     });
 
     if (!user || !user.refreshToken)
-      throw new ForbiddenException('Access Denied');
+      throw new HttpException('Access Denied', HttpStatus.UNAUTHORIZED);
 
     const refreshTokenMatches = await compare(user.refreshToken, refreshToken);
 
-    if (!refreshTokenMatches) throw new ForbiddenException('Access Denied');
+    if (!refreshTokenMatches)
+      throw new HttpException('Access Denied', HttpStatus.UNAUTHORIZED);
 
     const tokens = await this.getTokens(user);
 

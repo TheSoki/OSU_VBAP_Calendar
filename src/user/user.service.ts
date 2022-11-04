@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { User } from '@prisma/client';
 import { UserDto } from 'src/common/dto/user.dto';
@@ -16,9 +16,8 @@ export class UserService {
     const userExists = await this.prismaService.user.findUnique({
       where: { email: createUserDto.email },
     });
-    if (userExists) {
-      throw new BadRequestException('User already exists');
-    }
+    if (userExists)
+      throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
 
     const { password, ...rest } = createUserDto;
     const saltRounds = parseInt(
@@ -53,9 +52,8 @@ export class UserService {
     const userExists = await this.prismaService.user.findUnique({
       where: { email: updateUserDto.email },
     });
-    if (!userExists) {
-      throw new BadRequestException('User does not exist');
-    }
+    if (!userExists)
+      throw new HttpException('User does not exist', HttpStatus.BAD_REQUEST);
 
     const { password, ...rest } = updateUserDto;
     const saltRounds = parseInt(
@@ -75,6 +73,12 @@ export class UserService {
   }
 
   async remove(id: Pick<User, 'id'>['id']): Promise<User> {
+    const userExists = await this.prismaService.user.findUnique({
+      where: { id },
+    });
+    if (!userExists)
+      throw new HttpException('User does not exist', HttpStatus.BAD_REQUEST);
+
     return this.prismaService.user.delete({
       where: {
         id,
