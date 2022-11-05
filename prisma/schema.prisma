@@ -11,16 +11,16 @@ datasource db {
 }
 
 model User {
-  id            String   @id @default(uuid())
-  email         String   @unique
+  id            String      @id @default(uuid())
+  email         String      @unique
   name          String
-  account       Account?
+  accountId     String      @unique
+  account       Account     @relation(fields: [accountId], references: [id], onDelete: Cascade)
 }
 
 model Account {
-  id            String   @id @default(uuid())
+  id            String      @id @default(uuid())
   refreshToken  String?
   password      String
-  userId        String @unique 
-  user          User   @relation(fields: [userId], references: [id])   
+  user          User?
 }
