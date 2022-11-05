@@ -7,6 +7,7 @@ import {
   Delete,
   UseGuards,
   Req,
+  Put,
 } from '@nestjs/common';
 import { NoteService } from './note.service';
 import { ApiTags } from '@nestjs/swagger';
@@ -39,7 +40,6 @@ export class NoteController {
     return this.noteService.findOne(id);
   }
 
-  /*
   @UseGuards(AccessTokenGuard)
   @Put(':id')
   update(
@@ -48,7 +48,6 @@ export class NoteController {
   ) {
     return this.noteService.update(id, updateNoteDto);
   }
-  */
 
   @UseGuards(AccessTokenGuard)
   @Delete(':id')

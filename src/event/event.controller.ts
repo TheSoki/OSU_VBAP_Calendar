@@ -7,6 +7,7 @@ import {
   Delete,
   UseGuards,
   Req,
+  Put,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { AccessTokenGuard } from 'src/common/guards/accessToken.guard';
@@ -39,7 +40,6 @@ export class EventController {
     return this.eventService.findOne(id);
   }
 
-  /*
   @UseGuards(AccessTokenGuard)
   @Put(':id')
   update(
@@ -48,7 +48,6 @@ export class EventController {
   ) {
     return this.eventService.update(id, updateEventDto);
   }
-  */
 
   @UseGuards(AccessTokenGuard)
   @Delete(':id')

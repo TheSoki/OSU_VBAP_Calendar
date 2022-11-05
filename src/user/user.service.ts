@@ -55,16 +55,30 @@ export class UserService {
     updateUserDto: UserDto,
   ): Promise<User> {
     const userExists = await this.prismaService.user.findUnique({
-      where: { email: updateUserDto.email },
+      where: { id },
     });
     if (!userExists)
       throw new HttpException('User does not exist', HttpStatus.BAD_REQUEST);
+
+    const userByEmail = await this.prismaService.user.findUnique({
+      where: { email: updateUserDto.email },
+    });
+
+    if (userByEmail && userByEmail.id !== id) {
+      throw new HttpException(
+        'Email is already in use',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
 
     return this.prismaService.user.update({
       where: {
         id,
       },
-      data: updateUserDto,
+      data: {
+        name: updateUserDto.name,
+        email: updateUserDto.email,
+      },
     });
   }
 

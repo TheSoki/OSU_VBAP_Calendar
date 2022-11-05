@@ -6,12 +6,14 @@ import {
   Param,
   Delete,
   UseGuards,
+  Put,
 } from '@nestjs/common';
 import { AccessTokenGuard } from 'src/common/guards/accessToken.guard';
 import { UserService } from './user.service';
 import { User } from '@prisma/client';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateUserDto } from './dto/create-user.dto';
+import { UserDto } from './dto/user.dto';
 
 @ApiTags('user')
 @Controller('user')
@@ -36,7 +38,6 @@ export class UserController {
     return this.userService.findOne(id);
   }
 
-  /*
   @UseGuards(AccessTokenGuard)
   @Put(':id')
   update(
@@ -45,7 +46,6 @@ export class UserController {
   ) {
     return this.userService.update(id, updateUserDto);
   }
-  */
 
   @UseGuards(AccessTokenGuard)
   @Delete(':id')
