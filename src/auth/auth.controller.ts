@@ -3,9 +3,9 @@ import { Request } from 'express';
 import { AccessTokenGuard } from 'src/common/guards/accessToken.guard';
 import { RefreshTokenGuard } from 'src/common/guards/refreshToken.guard';
 import { AuthService } from './auth.service';
-import { AuthDto } from '../common/dto/auth.dto';
+import { AuthDto } from './dto/auth.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { CreateUserDto } from 'src/common/dto/create-user.dto';
+import { CreateUserDto } from 'src/user/dto/create-user.dto';
 
 @ApiTags('auth')
 @Controller('auth')

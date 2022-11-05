@@ -3,8 +3,8 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { User } from '@prisma/client';
 import { hash } from 'bcrypt';
 import { ConfigService } from '@nestjs/config';
-import { CreateUserDto } from 'src/common/dto/create-user.dto';
-import { UserDto } from 'src/common/dto/user.dto';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UserDto } from './dto/user.dto';
 
 @Injectable()
 export class UserService {

@@ -16,6 +16,8 @@ model User {
   name          String
   accountId     String      @unique
   account       Account     @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  notes         Note[]
+  events        Event[]
 }
 
 model Account {
@@ -23,4 +25,24 @@ model Account {
   refreshToken  String?
   password      String
   user          User?
+}
+
+model Note {
+  id            String      @id @default(uuid())
+  createdAt     DateTime    @default(now())
+  title         String
+  content       String
+  userId        String      @unique
+  user          User        @relation(fields: [userId], references: [id])
+}
+
+model Event {
+  id            String      @id @default(uuid())
+  createdAt     DateTime    @default(now())
+  title         String
+  content       String
+  start         DateTime
+  end           DateTime
+  userId        String      @unique
+  user          User        @relation(fields: [userId], references: [id])
 }

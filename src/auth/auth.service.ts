@@ -1,11 +1,11 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
-import { AuthDto } from '../common/dto/auth.dto';
+import { AuthDto } from './dto/auth.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { JwtDto } from '../common/dto/jwt.dto';
+import { JwtDto } from './dto/jwt.dto';
 import { compare, hash } from 'bcrypt';
-import { CreateUserDto } from 'src/common/dto/create-user.dto';
+import { CreateUserDto } from 'src/user/dto/create-user.dto';
 
 @Injectable()
 export class AuthService {
