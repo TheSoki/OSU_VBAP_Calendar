@@ -18,6 +18,7 @@ model User {
   account       Account     @relation(fields: [accountId], references: [id], onDelete: Cascade)
   notes         Note[]
   events        Event[]
+  permissions   Permission[]
 }
 
 model Account {
@@ -45,4 +46,10 @@ model Event {
   end           DateTime
   userId        String    
   user          User        @relation(fields: [userId], references: [id])
+}
+
+model Permission {
+  id            String      @id @default(uuid())
+  name          String      @unique
+  users         User[]
 }

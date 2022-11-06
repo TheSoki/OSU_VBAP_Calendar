@@ -5,6 +5,7 @@ import { hash } from 'bcrypt';
 import { ConfigService } from '@nestjs/config';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserDto } from './dto/user.dto';
+import { PERMISSIONS } from 'src/constansts/permissions';
 
 @Injectable()
 export class UserService {
@@ -32,6 +33,11 @@ export class UserService {
         account: {
           create: {
             password: hashedPassword,
+          },
+        },
+        permissions: {
+          connect: {
+            name: PERMISSIONS.USER,
           },
         },
       },
