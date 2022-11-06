@@ -1,9 +1,11 @@
 import { AccessTokenGuard } from '@common/guard/accessToken.guard';
 import { PERMISSIONS } from '@constant/permissions';
 import { Controller, Get, Param, Put, UseGuards } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { User } from '@prisma/client';
 import { PermissionService } from './permission.service';
 
+@ApiTags('permission')
 @Controller('permission')
 export class PermissionController {
   constructor(private readonly permissionService: PermissionService) {}
