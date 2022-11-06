@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDate, IsString, MinLength } from 'class-validator';
+import { IsDateString, IsString, MinLength } from 'class-validator';
 
 export class EventDto {
   @IsString()
@@ -12,11 +12,11 @@ export class EventDto {
   @ApiProperty({ type: String, description: 'content' })
   readonly content: string;
 
-  @IsDate()
+  @IsDateString()
   @ApiProperty({ type: Date, description: 'start' })
   readonly start: Date;
 
-  @IsDate()
+  @IsDateString()
   @ApiProperty({ type: Date, description: 'end' })
   readonly end: Date;
 }

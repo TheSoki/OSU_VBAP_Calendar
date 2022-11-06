@@ -22,8 +22,8 @@ export class EventService {
       data: {
         title: createEventDto.title,
         content: createEventDto.content,
-        start: createEventDto.start,
-        end: createEventDto.end,
+        start: new Date(createEventDto.start),
+        end: new Date(createEventDto.end),
         user: {
           connect: {
             id: userId,
