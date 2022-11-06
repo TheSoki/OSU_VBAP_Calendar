@@ -32,7 +32,7 @@ model Note {
   createdAt     DateTime    @default(now())
   title         String
   content       String
-  userId        String      @unique
+  userId        String    
   user          User        @relation(fields: [userId], references: [id])
 }
 
@@ -43,6 +43,6 @@ model Event {
   content       String
   start         DateTime
   end           DateTime
-  userId        String      @unique
+  userId        String    
   user          User        @relation(fields: [userId], references: [id])
 }
