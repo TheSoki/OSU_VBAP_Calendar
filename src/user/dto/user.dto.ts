@@ -6,10 +6,10 @@ export class UserDto {
   @IsString()
   @MinLength(4)
   @ApiProperty({ type: String, description: 'email' })
-  email: string;
+  readonly email: string;
 
   @IsString()
   @MinLength(4)
   @ApiProperty({ type: String, description: 'name' })
-  name: string;
+  readonly name: string;
 }

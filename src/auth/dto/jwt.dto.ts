@@ -6,15 +6,15 @@ export class JwtDto {
   @IsString()
   @MinLength(4)
   @ApiProperty({ type: String, description: 'email' })
-  email: string;
+  readonly email: string;
 
   @IsString()
   @MinLength(4)
   @ApiProperty({ type: String, description: 'name' })
-  name: string;
+  readonly name: string;
 
   @IsString()
   @MinLength(4)
   @ApiProperty({ type: String, description: 'id' })
-  id: string;
+  readonly id: string;
 }

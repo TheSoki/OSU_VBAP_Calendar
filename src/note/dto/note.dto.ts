@@ -5,10 +5,10 @@ export class NoteDto {
   @IsString()
   @MinLength(4)
   @ApiProperty({ type: String, description: 'title' })
-  title: string;
+  readonly title: string;
 
   @IsString()
   @MinLength(4)
   @ApiProperty({ type: String, description: 'content' })
-  content: string;
+  readonly content: string;
 }

@@ -5,18 +5,18 @@ export class EventDto {
   @IsString()
   @MinLength(4)
   @ApiProperty({ type: String, description: 'title' })
-  title: string;
+  readonly title: string;
 
   @IsString()
   @MinLength(4)
   @ApiProperty({ type: String, description: 'content' })
-  content: string;
+  readonly content: string;
 
   @IsDate()
   @ApiProperty({ type: Date, description: 'start' })
-  start: Date;
+  readonly start: Date;
 
   @IsDate()
   @ApiProperty({ type: Date, description: 'end' })
-  end: Date;
+  readonly end: Date;
 }
