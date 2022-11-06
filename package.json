@@ -17,7 +17,8 @@
     "postinstall": "prisma generate",
     "migrate": "prisma migrate dev --name $name",
     "applyMigrations": "prisma migrate dev",
-    "unapplyMigrations": "prisma migrate reset"
+    "unapplyMigrations": "prisma migrate reset",
+    "seed": "ts-node -r tsconfig-paths/register ./src/scripts/seed.ts"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
