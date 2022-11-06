@@ -12,9 +12,9 @@ import {
 import { NoteService } from './note.service';
 import { ApiTags } from '@nestjs/swagger';
 import { Note } from '@prisma/client';
-import { AccessTokenGuard } from 'src/common/guards/accessToken.guard';
 import { NoteDto } from './dto/note.dto';
 import { Request } from 'express';
+import { AccessTokenGuard } from '@common/guard/accessToken.guard';
 
 @ApiTags('note')
 @Controller('note')

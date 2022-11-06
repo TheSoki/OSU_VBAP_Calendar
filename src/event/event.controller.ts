@@ -10,11 +10,11 @@ import {
   Put,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { AccessTokenGuard } from 'src/common/guards/accessToken.guard';
 import { Request } from 'express';
 import { EventService } from './event.service';
 import { EventDto } from './dto/event.dto';
 import { Event } from '@prisma/client';
+import { AccessTokenGuard } from '@common/guard/accessToken.guard';
 
 @ApiTags('event')
 @Controller('event')

@@ -1,13 +1,13 @@
+import { PERMISSIONS_TYPE } from '@constant/permissions';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { User } from '@prisma/client';
-import { PERMISSIONSTYPE } from 'src/constansts/permissions';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '@prisma/prisma.service';
 
 @Injectable()
 export class PermissionService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async update(id: Pick<User, 'id'>['id'], permissions: PERMISSIONSTYPE[]) {
+  async update(id: Pick<User, 'id'>['id'], permissions: PERMISSIONS_TYPE[]) {
     const userExists = await this.prismaService.user.findUnique({
       where: { id },
     });

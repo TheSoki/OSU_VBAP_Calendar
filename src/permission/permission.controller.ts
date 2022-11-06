@@ -1,7 +1,7 @@
+import { AccessTokenGuard } from '@common/guard/accessToken.guard';
+import { PERMISSIONS } from '@constant/permissions';
 import { Controller, Get, Param, Put, UseGuards } from '@nestjs/common';
 import { User } from '@prisma/client';
-import { AccessTokenGuard } from 'src/common/guards/accessToken.guard';
-import { PERMISSIONS } from 'src/constansts/permissions';
 import { PermissionService } from './permission.service';
 
 @Controller('permission')
