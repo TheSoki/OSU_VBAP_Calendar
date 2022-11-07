@@ -1,4 +1,4 @@
-import { PERMISSIONS_TYPE } from '@constant/permissions';
+import { PERMISSIONS_TYPE } from '@common/constant/permissions';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { User } from '@prisma/client';
 import { PrismaService } from '@prisma/prisma.service';

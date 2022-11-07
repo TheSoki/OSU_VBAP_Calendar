@@ -30,28 +30,33 @@ export class NoteController {
 
   @UseGuards(AccessTokenGuard)
   @Get()
-  findAll() {
-    return this.noteService.findAll();
+  findAll(@Req() req: Request) {
+    const userId = req.user['id'];
+    return this.noteService.findAll(userId);
   }
 
   @UseGuards(AccessTokenGuard)
   @Get(':id')
-  findOne(@Param('id') id: Pick<Note, 'id'>['id']) {
-    return this.noteService.findOne(id);
+  findOne(@Req() req: Request, @Param('id') id: Pick<Note, 'id'>['id']) {
+    const userId = req.user['id'];
+    return this.noteService.findOne(id, userId);
   }
 
   @UseGuards(AccessTokenGuard)
   @Put(':id')
   update(
+    @Req() req: Request,
     @Param('id') id: Pick<Note, 'id'>['id'],
     @Body() updateNoteDto: NoteDto,
   ) {
-    return this.noteService.update(id, updateNoteDto);
+    const userId = req.user['id'];
+    return this.noteService.update(id, updateNoteDto, userId);
   }
 
   @UseGuards(AccessTokenGuard)
   @Delete(':id')
-  remove(@Param('id') id: Pick<Note, 'id'>['id']) {
-    return this.noteService.remove(id);
+  remove(@Req() req: Request, @Param('id') id: Pick<Note, 'id'>['id']) {
+    const userId = req.user['id'];
+    return this.noteService.remove(id, userId);
   }
 }

@@ -30,28 +30,33 @@ export class EventController {
 
   @UseGuards(AccessTokenGuard)
   @Get()
-  findAll() {
-    return this.eventService.findAll();
+  findAll(@Req() req: Request) {
+    const userId = req.user['id'];
+    return this.eventService.findAll(userId);
   }
 
   @UseGuards(AccessTokenGuard)
   @Get(':id')
-  findOne(@Param('id') id: Pick<Event, 'id'>['id']) {
-    return this.eventService.findOne(id);
+  findOne(@Req() req: Request, @Param('id') id: Pick<Event, 'id'>['id']) {
+    const userId = req.user['id'];
+    return this.eventService.findOne(id, userId);
   }
 
   @UseGuards(AccessTokenGuard)
   @Put(':id')
   update(
+    @Req() req: Request,
     @Param('id') id: Pick<Event, 'id'>['id'],
     @Body() updateEventDto: EventDto,
   ) {
-    return this.eventService.update(id, updateEventDto);
+    const userId = req.user['id'];
+    return this.eventService.update(id, updateEventDto, userId);
   }
 
   @UseGuards(AccessTokenGuard)
   @Delete(':id')
-  remove(@Param('id') id: Pick<Event, 'id'>['id']) {
-    return this.eventService.remove(id);
+  remove(@Req() req: Request, @Param('id') id: Pick<Event, 'id'>['id']) {
+    const userId = req.user['id'];
+    return this.eventService.remove(id, userId);
   }
 }

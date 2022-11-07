@@ -5,7 +5,7 @@ import { ConfigService } from '@nestjs/config';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserDto } from './dto/user.dto';
 import { PrismaService } from '@prisma/prisma.service';
-import { PERMISSIONS } from '@constant/permissions';
+import { PERMISSIONS } from '@common/constant/permissions';
 
 @Injectable()
 export class UserService {

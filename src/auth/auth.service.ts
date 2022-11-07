@@ -6,7 +6,7 @@ import { JwtDto } from './dto/jwt.dto';
 import { compare, hash } from 'bcrypt';
 import { PrismaService } from '@prisma/prisma.service';
 import { CreateUserDto } from '@user/dto/create-user.dto';
-import { PERMISSIONS } from '@constant/permissions';
+import { PERMISSIONS } from '@common/constant/permissions';
 
 @Injectable()
 export class AuthService {

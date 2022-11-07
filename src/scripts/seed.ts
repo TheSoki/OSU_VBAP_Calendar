@@ -1,4 +1,4 @@
-import { PERMISSIONS } from '@constant/permissions';
+import { PERMISSIONS } from '@common/constant/permissions';
 import { Prisma, PrismaClient } from '@prisma/client';
 import { hash } from 'bcrypt';
 
