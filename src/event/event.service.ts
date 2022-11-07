@@ -62,6 +62,10 @@ export class EventService {
       },
     });
 
+    if (!event) {
+      throw new HttpException('Event does not exist', HttpStatus.BAD_REQUEST);
+    }
+
     if (isAdmin || event.userId === userId) {
       return event;
     } else {
