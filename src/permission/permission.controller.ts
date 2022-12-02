@@ -28,6 +28,12 @@ export class PermissionController {
   }
 
   @UseGuards(PermissionGuard(PERMISSIONS.ADMIN))
+  @Delete(':id')
+  removePermission(@Req() req: Request, @Body() body: PermissionDto) {
+    return this.permissionService.remove(req.params.id, body.permission);
+  }
+
+  @UseGuards(PermissionGuard(PERMISSIONS.ADMIN))
   @Get()
   findAll() {
     return this.permissionService.findAll();
