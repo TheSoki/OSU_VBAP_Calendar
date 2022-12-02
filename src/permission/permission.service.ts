@@ -7,7 +7,7 @@ import { PrismaService } from '@prisma/prisma.service';
 export class PermissionService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async update(id: Pick<User, 'id'>['id'], permissions: PERMISSIONS_TYPE[]) {
+  async add(id: Pick<User, 'id'>['id'], permission: PERMISSIONS_TYPE) {
     const userExists = await this.prismaService.user.findUnique({
       where: { id },
     });
@@ -19,7 +19,7 @@ export class PermissionService {
       where: { id },
       data: {
         permissions: {
-          set: permissions.map((permission) => ({ name: permission })),
+          connect: { name: permission },
         },
       },
     });
