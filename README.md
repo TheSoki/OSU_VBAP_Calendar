@@ -13,7 +13,7 @@ yarn start:dev
 
 ```
 docker build -t nest-calendar .
-docker run -p80:3000 nest-calendar
+docker run -p80:3000 --name nest-calendar nest-calendar
 ```
 
 ## API
