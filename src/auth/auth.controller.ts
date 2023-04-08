@@ -36,4 +36,10 @@ export class AuthController {
 
     return this.authService.refreshTokens(userId, refreshToken);
   }
+
+  @UseGuards(AccessTokenGuard)
+  @Get('me')
+  me(@Req() req: Request) {
+    return this.authService.me(req.user['id']);
+  }
 }

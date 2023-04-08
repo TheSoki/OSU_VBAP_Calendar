@@ -138,4 +138,11 @@ export class AuthService {
 
     return tokens;
   }
+
+  async me(id: string) {
+    return this.prismaService.user.findUnique({
+      where: { id },
+      include: { permissions: true },
+    });
+  }
 }
