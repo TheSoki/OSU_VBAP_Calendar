@@ -61,6 +61,7 @@ export class AuthService {
       throw new HttpException('Password is incorrect', HttpStatus.BAD_REQUEST);
 
     const tokens = await this.getTokens(user);
+    await this.updateRefreshToken(user.id, tokens.refreshToken);
 
     return tokens;
   }
@@ -95,7 +96,7 @@ export class AuthService {
         },
         {
           secret: this.configService.get<string>('JWT_ACCESS_SECRET'),
-          expiresIn: '15m',
+          expiresIn: '1h',
         },
       ),
       this.jwtService.signAsync(
@@ -104,7 +105,7 @@ export class AuthService {
         },
         {
           secret: this.configService.get<string>('JWT_REFRESH_SECRET'),
-          expiresIn: '7d',
+          expiresIn: '30d',
         },
       ),
     ]);
@@ -133,7 +134,6 @@ export class AuthService {
       throw new HttpException('Access Denied', HttpStatus.UNAUTHORIZED);
 
     const tokens = await this.getTokens(user);
-
     await this.updateRefreshToken(user.id, tokens.refreshToken);
 
     return tokens;
